@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <title>Job Application Form</title>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <form id="jobApplicationForm">
+        <div class="mb-3">
+          <label for="fullName" class="form-label">Full Name:</label>
+          <input type="text" class="form-control" id="fullName" name="fullName" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email:</label>
+          <input type="email" class="form-control" id="email" name="email" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="resume" class="form-label">Resume (PDF only):</label>
+          <input
+            type="file"
+            class="form-control"
+            id="resume"
+            name="resume"
+            accept=".pdf"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="coverLetter" class="form-label">Cover Letter:</label>
+          <textarea
+            class="form-control"
+            id="coverLetter"
+            name="coverLetter"
+            rows="4"
+            required
+          ></textarea>
+        </div>
+
+        <div class="mb-3">
+          <button type="submit" class="btn btn-primary">Submit Application</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Include Controllet library -->
+    <script type="text/javascript" src="../dist/controllet.min.js"></script>
+
+    <script type="text/javascript">
+      const jobApplicationForm = new Controllet({
+        formElement: document.getElementById("jobApplicationForm"),
+        customValidators: {
+          email: {
+            validations: [
+              {
+                errorMessage: "Please enter a valid business email address.",
+                condition: (input) => input.value.endsWith("@company.com"),
+              },
+            ],
+          },
+        },
+        inputModifiers: {
+          fullName: (value) => value.trim(),
+          email: (value) => value.toLowerCase(),
+        },
+        customSuccessMessages: {
+          resume: {
+            message: "Resume uploaded successfully!",
+            condition: (field) => field.files.length > 0,
+          },
+        },
+        customClasses: {
+          error: "invalid-feedback",
+          invalidInput: "is-invalid",
+          success: "valid-feedback",
+          validInput: "is-valid",
+        },
+      });
+
+      jobApplicationForm.handleSubmit((formData) => {
+        const { status, data, errors } = formData;
+
+        if (status) {
+          console.log("Job application submitted", data);
+          // Additional logic or redirection can be added here
+        } else {
+          console.error("Error submitting job application", errors);
+        }
+      });
+    </script>
+  </body>
+</html>

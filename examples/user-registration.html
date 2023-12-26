@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <title>User Registration</title>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h2 class="mb-4">User Registration</h2>
+      <form id="registrationForm">
+        <div class="mb-3">
+          <label for="fullName" class="form-label">Full Name:</label>
+          <input type="text" class="form-control" id="fullName" name="fullName" required />
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address:</label>
+          <input type="email" class="form-control" id="email" name="email" required />
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password:</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+            minlength="6"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label">Confirm Password:</label>
+          <input
+            type="password"
+            class="form-control"
+            id="confirmPassword"
+            name="confirmPassword"
+            required
+          />
+        </div>
+        <div class="mb-3 form-check">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            id="agreeTerms"
+            name="agreeTerms"
+            required
+          />
+          <label class="form-check-label" for="agreeTerms"
+            >I agree to the terms and conditions</label
+          >
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+      </form>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Include the Controllet library -->
+    <script type="text/javascript" src="../dist/controllet.min.js"></script>
+
+    <script type="text/javascript">
+      // Initialize Controllet for the registration form
+      const registrationForm = new Controllet({
+        formElement: document.getElementById("registrationForm"),
+        customValidators: {
+          confirmPassword: {
+            override: true,
+            validations: [
+              {
+                errorMessage: "Passwords do not match.",
+                condition: (input) => input.value === document.getElementById("password").value,
+              },
+            ],
+          },
+        },
+        customClasses: {
+          error: "text-danger",
+          invalidInput: "is-invalid",
+        },
+      });
+
+      // Handle form submission
+      registrationForm.handleSubmit((formData) => {
+        const { status, data, errors } = formData;
+
+        if (status) {
+          console.log("User registered successfully", data);
+          // Use a setTimeout to allow the form submission to complete before resetting
+          setTimeout(() => {
+            registrationForm.reset("soft");
+          }, 0);
+        } else {
+          console.error("Error registering user", errors);
+        }
+      });
+    </script>
+  </body>
+</html>
