@@ -100,13 +100,14 @@ controllet.handleSubmit((formData) => {
 
 ## Documentation
 
-Documentation for Controllet.js is currently under development and will be available soon. We are working hard to provide comprehensive guides, and usage examples.
+Dive into our detailed guides and explore usage examples to make the most out of Controllet.js in your projects.
 
-In the meantime, you can refer to the [Examples](#examples) section for practical usage scenarios or explore the source code for detailed comments.
+- **[Check out the Documentation](docs/README.md)**
+- **[Explore Examples](#examples)**
 
-For any specific questions or assistance, feel free to reach out to us on [GitHub Issues](https://github.com/mouaadblhn/controllet.js/issues).
+If you have any questions, encounter issues, or need assistance, feel free to reach out on [GitHub Issues](https://github.com/mouaadblhn/controllet.js/issues).
 
-Thank you for your patience!
+Happy coding!
 
 ## Examples
 
