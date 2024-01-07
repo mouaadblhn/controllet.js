@@ -11,7 +11,7 @@
   "scripts": {
     "build": "uglifyjs lib/InputValidation.js lib/Controllet.js -o dist/controllet.min.js --compress --mangle --source-map"
   },
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "uglify-js": "^3.17.4"
   }
